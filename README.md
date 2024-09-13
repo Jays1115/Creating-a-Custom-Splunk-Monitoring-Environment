@@ -3,60 +3,45 @@
 
 <b>[Tech Portfolio Home](https://github.com/Jays1115/Jalen-Smith.git)</b>
 
-# Creating a Custom Splunk Monitoring Environment
+# Vandalay Industries Is Under Attack
 
-<h2>Description</h2>
-Scenerio: Vandalay Industries uses Splunk for their security monitoring and have been experiencing a variety of security issues against their online systems over the past few months.
-<br><br>
-Assignment: Develop searches, custom reports, and alerts to monitor Vandalay's security environment in order to protect them from future attacks.
+<h2>Part 1 Description</h2>
+Scenerio: As the worldwide leader of importing and exporting, Vandalay Industries has been the target of many adversaries attempting to disrupt their online business. Recently, Vandalay has been experiencing DDOS attacks against their web servers. Not only were Vandalay web servers taken offline by a DDOS attack, but upload and download speed were also significantly impacted after the outage.
+<br>
+<br>
+Assignment: Create a report to determine the impact of the DDOS attack on upload and download speed. Create an additional field to calculate the ratio of the upload speed to the download speed.
 
 <h2>Program walk-through:</h2>
 
 <p align="center">
-Navigating to the S3 Section within AWS. AWS has already populated the S3 instances needed for this lab: <br/>
-<img src="images/Screenshot 2024-09-13 at 9.10.12 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Selecting the correct S3 bucket associated with the beach website (website-bucket-cfc90080):  <br/>
-<img src="images/Screenshot 2024-09-13 at 8.15.48 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Reviewing objects in the S3 bucket and renaming the text.html file to fit its function. This file contains the code for the error page, which opens whenever something goes wrong: <br/>
-<img src="images/Screenshot 2024-09-13 at 8.20.29 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="images/Screenshot 2024-09-13 at 8.25.33 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Ensuring that “block all public access” is set to “off” so that the static website’s visitors will be able to access the website when its launched:  <br/>
-<img src="images/Screenshot 2024-09-13 at 8.29.36 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Reviewing the bucket policy. <br/>
-Policy details: <br/>
-- This policy allows public access to the S3 bucket. <br/>
-- Effect says this policy will Allow access. <br/>
-- Principal defines who has access. In this case, * represents anyone. <br/>
-- Action defines what users can do to objects in the bucket. In this case, users can only retrieve data with GetObject. <br/>
-- Resource specifies that this policy applies to only this bucket. <br/>
-<img src="images/Screenshot 2024-09-13 at 8.32.53 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Navigated to the S3 bucket properties section to enable static website hosting:  <br/>
-<img src="images/Screenshot 2024-09-13 at 8.37.20 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-Static website hosting is enabled:  <br/>
-<img src="images/Screenshot 2024-09-13 at 8.42.52 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+Used the eval command to create a field called ratio that shows the ratio between the upload and download speeds. Then, created a report using Splunk's table command to display the _time, IP_ADDRESS, DOWNLOAD_MEGABITS, UPLOAD_MEGABITS, ratio fields in a statistics report.
 <br/>
-<br/>
-Copy & pasted the bucket website endpoint into my internet browser to see if the website has been successfully enabled: 
-<img src="image/Screenshot 2024-09-13 at 8.45.19 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br/>
-<br/>
-Renaming the S3 object to reflect its function within website:  <br/>
-<img src="images/Screenshot 2024-09-13 at 8.48.14 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="images/Screenshot 2024-09-13 at 8.48.34 AM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br/>
+<img src="images/1.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
+<img src="images/2.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<b>Findings</b>
+ <br/>
+Based on the report generated above, 2/23/2020 @ 2:30 was the approximate time of the DDOS attack on Vandalay. Its reasonable to infer that the attack took place during that time due to the sharp decline in download and upload speeds recorded during that time. I took Vandlay's system approximately 6 hours to recover.
+ 
+<h2>Part 2 Description</h2>
+Scenerio: Due to the frequency of attacks, your manager needs to be sure that sensitive customer data on their servers is not vulnerable. Since Vandalay uses Nessus vulnerability scanners, you have pulled the last 24 hours of scans to see if there are any critical vulnerabilities.
+<br>
+<br>
+Assignment: Create a report determining how many critical vulnerabilities exist on the customer data server. Then, build an alert to notify your team if a critical vulnerability reappears on this server.
 
+<h2>Program walk-through:</h2>
+
+<p align="center">
+After uploading the Nessues vulnerability scan to Splunk, created a report that shows the count of critical vulnerabilities from the customer database server (10.11.36.23) and counted the number vulnerabilities by their level of severity (informational, low, medium, high, critical).
+<br/>
+<img src="images/3.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
+ <br/>
+ <br/>
+ Built an alert that monitors every day to see if this server has any critical vulnerabilities. If a critical vulnerability exists, the alert will send an email to soc@vandalay.com.
+ <br/>
+ <img src="images/4.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
+ 
 <!--
  ```diff
 - text in red
