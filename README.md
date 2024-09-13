@@ -38,10 +38,27 @@ After uploading the Nessues vulnerability scan to Splunk, created a report that 
 <img src="images/3.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
  <br/>
  <br/>
- Built an alert that monitors every day to see if this server has any critical vulnerabilities. If a critical vulnerability exists, the alert will send an email to soc@vandalay.com.
+ From the above report, built an alert that monitors every day to see if this server has any critical vulnerabilities. If a critical vulnerability exists, the alert will send an email to soc@vandalay.com.
  <br/>
  <img src="images/4.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
  
+ <h2>Part 3 Description</h2>
+Scenerio: A Vandaly server is also experiencing brute force attacks into their administrator account. Management would like you to set up monitoring to notify the SOC team if a brute force attack occurs again
+<br>
+<br>
+Assignment: Analyze administrator logs that document a brute force attack. Then, create a baseline of the ordinary amount of administrator bad logins and determine a threshold to indicate if a brute force attack is occurring.
+
+<h2>Program walk-through:</h2>
+
+<p align="center">
+After uploading the admin logs to Splunk, created a timechart that shows the number of failed logon attempts over the entirety of the dataset. Decided to visualize this data as a column chart to better understand the data. This allowed me to easily determine a threshold of greater than 24 failed logon attempts for the Brute Force Attack Alert I created below.
+<br/>
+<img src="images/5.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
+ <br/>
+ <br/>
+ From the above timechart, built an alert that monitors failed logon attempts evey hour. If greater than 24 failed logon attempts are detected, the alert will send an email to soc@vandalay.com.
+ <br/>
+ <img src="images/6.png" height="90%" width="90%" alt="Disk Sanitization Steps"/>
 <!--
  ```diff
 - text in red
